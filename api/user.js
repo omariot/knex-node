@@ -7,15 +7,11 @@ const users = (table) => {
   
 const createTableUsers = function(knex, Promise) {
     console.log('Probando crear tabla');
-    knex.schema.withSchema('ia').hasTable('users').then(function(exists) {
-        if (!exists) {
-          return knex.schema.withSchema('ia').createTable('users', users)
-                .then(() =>  console.log('Users Table created'))
-                .catch(() => console.log('There was an error with the users table'))
-                .finally(() => knex.destroy());
-        } else {
-            console.log('Ya esta tabla existe');
-        }
+    return knex.schema.createTable('users', function(table) {
+        table.increments().primary();
+        table.string('name');
+        table.string('password');
+        table.timestamp('created_at');
     });
 };
 
@@ -38,7 +34,7 @@ const selectUsers = (knex, Promise) => {
 };
 
 const insertUsers = (knex, data) => {
-    return  knex.schema.withSchema('ia').knex('users').insert({name:data.name, password: data.password});
+    return  knex('users').insert({name:data.name, password: data.password});
 }
 
 module.exports = {

@@ -7,8 +7,8 @@ switch (configEnv.DBTYPE) {
             client: 'oracledb',
             connection: {
               host: configEnv.DBHOST,
-              user: configEnv.USERNAME,
-              password: configEnv.PASSWORD,
+              user: configEnv.DBUSERNAME,
+              password: configEnv.DBPASSWORD,
               port: configEnv.DBPORT,
               database: configEnv.DBNAME,
 
@@ -30,8 +30,8 @@ switch (configEnv.DBTYPE) {
             client: 'postgresql',
             connection: {
                 database: configEnv.DBNAME,
-                user:     configEnv.USERNAME,
-                password: configEnv.PASSWORD
+                user:     configEnv.DBUSERNAME,
+                password: configEnv.DBPASSWORD
             },
             pool: {
                 min: 2,
@@ -47,8 +47,8 @@ switch (configEnv.DBTYPE) {
             client: 'mssql2',
             connection: {
                 server : configEnv.DBHOST,
-                user :   configEnv.USERNAME,
-                password : configEnv.PASSWORD,
+                user :   configEnv.DBUSERNAME,
+                password : configEnv.DBPASSWORD,
                 database : configEnv.DBNAME,
                 options: {
                 port: configEnv.DBPORT//14831
