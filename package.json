@@ -1,13 +1,14 @@
 {
   "name": "knex-node",
   "version": "1.0.0",
-  "description": "",
+  "description": "Simple CRUD using knex",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "keywords": [],
-  "author": "",
+  "author": "Omar Mariot",
   "license": "ISC",
   "dependencies": {
     "@hapi/hapi": "^19.1.1",
@@ -27,5 +28,14 @@
     "swagger-jsdoc": "^3.5.0",
     "swagger-ui-express": "^4.1.3",
     "underscore": "^1.9.2"
-  }
+  },
+  "devDependencies": {},
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omariot/knex-node.git"
+  },
+  "bugs": {
+    "url": "https://github.com/omariot/knex-node/issues"
+  },
+  "homepage": "https://github.com/omariot/knex-node#readme"
 }
