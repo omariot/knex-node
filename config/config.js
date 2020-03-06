@@ -1,3 +1,5 @@
+process.env.PORT = process.env.PORT || '3000';
+
 const DBTYPE = process.env.DBTYPE || 'oracledb';
 const DBNAME = process.env.DBNAME || 'xe';
 const DBPORT = process.env.DBPORT || '1521';

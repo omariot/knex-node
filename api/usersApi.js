@@ -1,68 +1,61 @@
-var tableName = 'USUARIO';
-var table = function(table) {
-    table.increments().primary();
-    table.string('name');
-    table.string('password');
-    table.string('email');
-    table.timestamp('created_at').defaultTo(Date.now());
-};
-  
+var generic = require('./genericApi');
+var dropTableUsers = generic.dropTable;
+var existTableUsers = generic.existTable;
+
 var createTableUsers = function(knex, Promise) {
-    console.log('Probando crear tabla');
-    if (this.existTableUsers()){        
-        return knex.schema.createTable(this.tableName, function(table) { 
-            table = this.table;
+    if(!existTableUsers(knex, 'USUARIO')){
+        return knex.schema.createTable('USUARIO', function(table) { 
+            table.increments().primary();
+            table.string('name');
+            table.string('password');
+            table.string('email');
+            table.datetime('created_at').defaultTo(knex.fn.now(6));
+            table.string('modified_by');
+            table.string('status');
         });
+    }else{
+        return console.error('Table already exist.');        
     }
-    return;
-};
-
-var dropTableUsers = function(knex, Promise) {    
-    return knex.schema.dropTable(this.tableName);
-};
-
-var existTableUsers = function(knex, Promise) {
-    return knex.schema.hasTable(this.tableName).then(function(exists) {
-        return exists;
-    });
 };
 
 var getUsers = function(knex, context, Promise) {
-    if(context.id) {
-        return knex(this.tableName).where({
-            id: context.id
+    if(id) {
+        return knex('USUARIO').where({
+            id: id
         } ).select();
     }
-    return knex(this.tableName).select();
+    return knex('USUARIO').select();
 };
 
 var postUsers = function(knex, data) {
-    return  knex(this.tableName).insert({
+    return  knex('USUARIO').insert({
         name:data.name, 
         password: data.password,
-        email: data.email
+        email: data.email,
+        status: data.status
     });
 };
 
 var putUsers = function(knex, data, id) {
     
-    return knex(this.tableName)
-        .where({ id:data.id})
+    return knex('USUARIO')
+        .where({ id: id})
         .update({
-            name:data.name, 
+            name: data.name, 
             password: data.password,
-            email: data.email
+            email: data.email,
+            modified_by: data.modified_by,
+            status: data.status
         });
 };
 
 var deleteUsers = function(knex, id ) {
-    return knex(this.tableName)
+    return knex('USUARIO')
     .where('id', id)
     .del();
 };
 
 module.exports = {
-      table,
       createTableUsers,
       dropTableUsers,
       existTableUsers,

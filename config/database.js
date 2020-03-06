@@ -1,4 +1,4 @@
-var configEnv = require('./config/config');
+var configEnv = require('./config');
 var stringConn = {};
 
 switch (configEnv.DBTYPE) {
